@@ -6,16 +6,16 @@ Created on 下午4:01 2020/7/7
 使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。
 
 示例：
-输入：nums = [1,2,3,4]
+输入：nums =[1,2,3,4]
 输出：[1,3,2,4]
-注：[3,1,2,4] 也是正确的答案之一。 
+注：[3,1,2,4] 也是正确的答案之一。
 
 提示：
 1 <= nums.length <= 50000
 1 <= nums[i] <= 10000
 """
 from typing import List
-class Solution:
+class Solution2: # 答案不对
     def exchange(self, nums: List[int]) -> List[int]:
         i, j = 0, len(nums)-1
         while i < j:
@@ -29,5 +29,34 @@ class Solution:
 
         return nums
 
-a = Solution()
-print(a.exchange([1,2,3,4]))
+class Solution:
+    def exchange(self, array):
+        i, j = 0, len(array)
+        while i < j:
+            if array[i] % 2 == 1:
+                i += 1
+            else:
+                array.append(array[i])
+                del(array[i])
+                j -= 1
+        return array
+    
+class Solution3:
+    def exchange(self, array):
+        # write code here
+        # 没有额外的数组空间。
+        # 实际上pop(index)的时间复杂度是O(n)，删除元素时后面的元素往前移动，总的时间复杂度接近O(n^2)
+        lenth = len(array)
+        move = 0
+        index = 0
+        while(lenth - move - index > 0):
+            if array[index]%2 == 0:
+                temp = array.pop(index)
+                array.append(temp)
+                move += 1
+                index -= 1
+            index += 1
+        return array
+
+a = Solution3()
+print(a.exchange([1,2,3,4,5,6,7]))
