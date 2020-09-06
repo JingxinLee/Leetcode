@@ -45,6 +45,14 @@ class Solution2:
         else:
             l2.next = self.mergeTwoLists(l1, l2.next)
             return l2
+# 递归 2
+    def Merge(self, pHead1, pHead2):
+        # write code here
+        if pHead1 and pHead2:
+            if pHead1.val > pHead2.val:
+                pHead1, pHead2 = pHead2, pHead1
+            pHead1.next = self.Merge(pHead1.next, pHead2)
+        return pHead1 or pHead2
 
 def stringToIntegerList(input):
     return json.loads(input)
