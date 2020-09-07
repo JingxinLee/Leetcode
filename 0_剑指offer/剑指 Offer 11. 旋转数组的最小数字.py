@@ -45,10 +45,15 @@ class Solution:
             # 因为low+high在low和high特别大的时候可能会造成溢出，使用减法避免了溢出发生
             # mid = left + (right - left) // 2
             if rotateArray[mid] > rotateArray[right]:
-                left = mid + 1
+                left = mid + 1 # mid大 肯定不是mid,所以是mid+1
             elif rotateArray[mid] < rotateArray[right]:
                 right = mid
             else:
                 right -= 1  # 缩小范围
         return rotateArray[left]
 
+    # 为什么是 right-- 缩小范围，而不是 left++？
+    # 因为数组是升序的，所以最小值一定靠近左侧，而不是右侧
+    # 比如，当存在 [1,2,2,2,2] 这种情况时，left = 0，right = 4，mid = 2，
+    # 数值满足 numbers[mid] == numbers[right] 这个条件，
+    # 如果 left++，则找不到最小值
