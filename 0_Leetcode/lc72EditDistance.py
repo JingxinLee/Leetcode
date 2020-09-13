@@ -40,7 +40,7 @@ PS:大佬的代码中word1.charAt(i-1)==word2.charAt(j-1)的原因是:
      初始化DP Table时dp[i][0]和dp[0][j]已经填写完成,所以接下来填表需要从1开始,
      但是字符的比较需要从0开始,因此才这样子写
 """
-import josn
+import json
 
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
@@ -54,14 +54,14 @@ class Solution:
 
         for i in range(1, m + 1):
             for j in range(1, n + 1):
-                if word[i - 1] == word[j - 1]:
+                if word1[i - 1] == word2[j - 1]:
                     dp[i][j] = dp[i - 1][j - 1]
                 else:
                     dp[i][j] = 1 + min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1])
         return dp[-1][-1]
 
 def stringToString(input):
-    return input[1:-1].decode('string_escape')
+    return input[1:-1]
 
 
 def main():
