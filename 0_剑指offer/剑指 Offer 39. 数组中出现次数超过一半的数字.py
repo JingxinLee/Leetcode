@@ -7,10 +7,20 @@ Created on 9:57 AM 7/22/20
 
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
 
-示例 1:
+示例1:
 输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]
 输出: 2
 
+初始化： 票数统计 votes = 0 ， 众数 x；
+循环： 遍历数组 nums 中的每个数字 num ；
+当 票数 votes 等于 0 ，则假设当前数字 num 是众数；
+当 num = x 时，票数 votes 自增 1 ；当 num != x 时，票数 votes 自减 1 ；
+返回值： 返回 x 即可；
+
+作者：jyd
+链接：https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/solution/mian-shi-ti-39-shu-zu-zhong-chu-xian-ci-shu-chao-3/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 """
 import json
 from typing import List

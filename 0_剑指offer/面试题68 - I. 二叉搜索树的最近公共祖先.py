@@ -7,7 +7,7 @@ Created on 11:03 PM 7/28/20
 
 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
 
-例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]
+例如，给定如下二叉搜索树: root =[6,2,8,0,4,7,9,null,null,3,5]
 
 示例 1:
 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
@@ -25,12 +25,12 @@ p、q 为不同节点且均存在于给定的二叉搜索树中。
 
 设节点 root为节点 p,q的某公共祖先，若其左子节点 root.left 和右子节点 root.right都不是 p,q的公共祖先，则称 root是 “最近的公共祖先” 。
 
-若 rootroot 是 p,qp,q 的 最近公共祖先 ，则只可能为以下情况之一：
+若 root 是 p,q的 最近公共祖先 ，则只可能为以下情况之一：
 1. p 和 q 在 root 的子树中，且分列 root 的 异侧（即分别在左、右子树中）；
 2. p = root，且 q 在 root 的左或右子树中；
 3. q = root，且 p 在 root 的左或右子树中；
 
-若 root.val < p.val，则 p 在 rootr 右子树 中；
+若 root.val < p.val，则 p 在 root 右子树 中；
 若 root.val > p.val，则 p 在 root 左子树 中；
 若 root.val = p.val，则 p 和 root 指向 同一节点 。
 
@@ -55,7 +55,7 @@ class Solution:
                 break
         return root
 
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode': # 递 归
+    def lowestCommonAncestor2(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode': # 递 归
         if root.val < p.val and root.val < q.val:
             return self.lowestCommonAncestor(root.right, p, q)
         if root.val > p.val and root.val > q.val:

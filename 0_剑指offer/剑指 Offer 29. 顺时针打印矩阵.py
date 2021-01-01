@@ -10,12 +10,13 @@ Created on 下午9:30 2020/7/12
 输出：[1,2,3,6,9,8,7,4,5]
 
 示例 2：
-输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+输入：matrix =[[1,2,3,4],[5,6,7,8],[9,10,11,12]]
 输出：[1,2,3,4,8,12,11,10,9,5,6,7]
- 
+
 限制：
 0 <= matrix.length <= 100
-0 <= matrix[i].length <= 100
+0 <= matrix[i].length<= 100
+# 时间 O(mn)    空间 O(1)
 """
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:

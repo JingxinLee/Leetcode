@@ -13,7 +13,7 @@ Created on 3:15 PM 7/26/20
   9  20
     /  \
    15   7
-返回它的最大深度 3 。
+返回它的最大深度3 。
 https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/solution/mian-shi-ti-55-i-er-cha-shu-de-shen-du-xian-xu-bia/
 """
 import json

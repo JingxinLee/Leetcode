@@ -10,7 +10,7 @@ Created on 11:01 PM 7/28/20
 输出: 2
 
 提示：
-a, b 均可能是负数或 0
+a,b均可能是负数或 0
 结果不会溢出 32 位整数
 https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/solution/mian-shi-ti-65-bu-yong-jia-jian-cheng-chu-zuo-ji-7/
 """

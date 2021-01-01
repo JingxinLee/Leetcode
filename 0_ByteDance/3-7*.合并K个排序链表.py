@@ -71,7 +71,7 @@ class Solution2: # 分 治
         dummy = ListNode(None)
         cursor_a, cursor_b, cursor_res = node_a, node_b, dummy
         while cursor_a and cursor_b:
-            if cursor_a <= cursor_b:
+            if cursor_a.val <= cursor_b.val:
                 cursor_res.next = ListNode(cursor_a.val)
                 cursor_a = cursor_a.next
             else:
