@@ -26,7 +26,7 @@ class Solution:
         for num in nums:
             ret = ret ^ num  # 得到要找的 2个数的异或
         a, b = 0, 0 # 准备分组 任何数与0 异或都是其本身
-        h = 1
+        h = 1  # 转化为二进制只有一位是１，其他都是０　　＝>　　０００００００１
         while h & ret == 0: # 找到第一步异或结果的第一个 1
             h <<= 1
         for num in nums:

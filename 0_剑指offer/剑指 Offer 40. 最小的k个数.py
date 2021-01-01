@@ -19,7 +19,9 @@ import collections
 import heapq
 import random
 
-class Solution:  # 前k个最小 用最大堆， 因为堆顶最大，比堆顶小的数就替换掉堆顶，然后还是k个最小； 前k个最大 用最小堆， 因为堆顶最小，比堆顶大的就替换掉堆顶，重新排，这样堆整体变大了，最后就找到k个最大值。
+class Solution:
+    # 前k个最小 用最大堆， 因为堆顶最大，比堆顶小的数就替换掉堆顶，然后还是k个最小；
+    # 前k个最大 用最小堆， 因为堆顶最小，比堆顶大的就替换掉堆顶，重新排，这样堆整体变大了，最后就找到k个最大值。
     def getLeastNumbers(self, arr: List[int], k: int) -> List[int]:
         if k == 0: return []
 

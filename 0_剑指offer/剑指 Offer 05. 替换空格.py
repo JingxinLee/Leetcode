@@ -8,7 +8,7 @@ Created on 下午12:11 2020/7/4
 示例 1：
 输入：s = "We are happy."
 输出："We%20are%20happy."
- 
+
 限制：
 0 <= s 的长度 <= 10000
 """

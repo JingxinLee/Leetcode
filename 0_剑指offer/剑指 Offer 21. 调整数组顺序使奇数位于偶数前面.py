@@ -15,7 +15,9 @@ Created on 下午4:01 2020/7/7
 1 <= nums[i] <= 10000
 """
 from typing import List
-class Solution2: # 答案不对
+
+# 不保留原始顺序
+class Solution2:
     def exchange(self, nums: List[int]) -> List[int]:
         i, j = 0, len(nums)-1
         while i < j:
@@ -29,6 +31,19 @@ class Solution2: # 答案不对
 
         return nums
 
+class Solution3:
+    def exchange(self, nums: List[int]) -> List[int]:
+        m, n = 0, len(nums) - 1
+        while m < n:
+            if nums[m] % 2 == 0:
+                nums[m], nums[n] = nums[n], nums[m]
+                n -= 1
+            else:
+                m += 1
+        return nums
+
+
+# 保留原始顺序
 class Solution:
     def exchange(self, array):
         i, j = 0, len(array)
@@ -40,8 +55,8 @@ class Solution:
                 del(array[i])
                 j -= 1
         return array
-    
-class Solution3:
+
+class Solution4:
     def exchange(self, array):
         # write code here
         # 没有额外的数组空间。

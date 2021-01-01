@@ -8,7 +8,7 @@ Created on 下午9:26 2020/7/12
 示例:
 输入: 1->2->3->4->5->NULL
 输出: 5->4->3->2->1->NULL
- 
+
 限制：
 0 <= 节点个数 <= 5000
 
@@ -43,7 +43,6 @@ class Solution2:
 from collections import deque
 class Solution3:
     def reverseList(self, head: ListNode) -> ListNode:
-
         # 利用队列实现迭代算法
         if not head:
             return None

@@ -1,33 +1,34 @@
-# -*- coding:utf-8 -*-
+1# -*- coding:utf-8 -*-
 """
 author: lijingxin
-Created on 下午9:25 2020/7/12
-输入一个链表，输出该链表中倒数第k个节点。
-为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
-例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。
-这个链表的倒数第3个节点是值为4的节点。
+Created on 10:34 PM 12/3/20
 
-示例：
-给定一个链表: 1->2->3->4->5, 和 k = 2.
-返回链表 4->5.
 """
-import json
+
+
 # Definition for singly-linked list.
+import json
+
 class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 class Solution:
-    def getKthFromEnd(self, head: ListNode, k: int) -> ListNode:
-        slow, fast = head, head
-        for i in range(k):
-            if not fast: return False # 需要判断一下 A是不是None了
-            fast = fast.next
-        while fast:
-            slow = slow.next
-            fast = fast.next
-        return slow
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        dummy = ListNode(0, head)
+        stack = list()
+        cur = dummy
+        while cur:
+            stack.append(cur)
+            cur = cur.next
+
+        for i in range(n):
+            stack.pop()
+
+        prev = stack[-1]
+        prev.next = prev.next.next
+        return dummy.next
 
 
 def stringToIntegerList(input):
@@ -74,9 +75,9 @@ def main():
             line = next(lines)
             head = stringToListNode(line);
             line = next(lines)
-            k = int(line);
+            n = int(line);
 
-            ret = Solution().getKthFromEnd(head, k)
+            ret = Solution().removeNthFromEnd(head, n)
 
             out = listNodeToString(ret);
             print(out)

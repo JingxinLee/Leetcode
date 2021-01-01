@@ -6,7 +6,7 @@ Created on 11:45 AM 7/19/20
 从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
 
 例如:
-给定二叉树: [3,9,20,null,null,15,7],
+给定二叉树:[3,9,20,null,null,15,7],
 
     3
    / \
@@ -31,7 +31,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-class Solution:
+class Solution: # use deque
     def levelOrder(self, root: TreeNode) -> List[int]:
         if not root: return []
         res, queue = [], collections.deque()
@@ -43,6 +43,17 @@ class Solution:
             if node.right: queue.append(node.right)
         return res
 
+class Solution: # not use deque
+    # 返回从上到下每个节点值列表，例：[1,2,3]
+    def PrintFromTopToBottom(self, root):
+        if not root: return []
+        res, queue = [], [root]
+        while queue:
+            node = queue.pop(0)
+            res.append(node.val)
+            if node.left: queue.append(node.left)
+            if node.right: queue.append(node.right)
+        return res
 
 def stringToTreeNode(input):
     input = input.strip()
