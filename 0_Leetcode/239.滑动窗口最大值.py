@@ -38,10 +38,12 @@ Created on 1:52 PM 1/2/21
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/sliding-window-maximum
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+https://leetcode-cn.com/problems/sliding-window-maximum/solution/hua-dong-chuang-kou-zui-da-zhi-by-leetco-ki6m/
 """
 import json
 from typing import List
 import heapq
+import collections
 
 class Solution:
     def maxSlidingWindow1(self, nums: List[int], k: int) -> List[int]: # 暴力法
@@ -55,7 +57,14 @@ class Solution:
             res.append(maxx)
         return res
 
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+    def maxSlidingWindow2(self, nums: List[int], k: int) -> List[int]:  # 优先队列
+        """
+        时间复杂度：O(nlogn)，其中 n 是数组nums 的长度。在最坏情况下，数组 nums 中的元素单调递增，那么最终优先队列中包含了所有元素，没有元素被移除。
+                  由于将一个元素放入优先队列的时间复杂度为 O(logn)，因此总时间复杂度为 O(nlogn)。
+
+        空间复杂度：O(n)，即为优先队列需要使用的空间。这里所有的空间复杂度分析都不考虑返回的答案需要的 O(n) 空间，只计算额外的空间使用。
+
+        """
         n = len(nums)
         q = [(-nums[i], i) for i in range(k)]
         heapq.heapify(q)
@@ -67,6 +76,27 @@ class Solution:
                 heapq.heappop(q)
             ans.append(-q[0][0])
         return ans
+
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:  # 单调队列
+        n = len(nums)
+        q = collections.deque() # q 保存下标
+        # 将前k个值放入q
+        for i in range(k):
+            while q and nums[i] >= nums[q[-1]]: # 下标对应的数值是递减的
+                q.pop()
+            q.append(i)
+
+        ans = [nums[q[0]]]
+
+        for j in range(k, n):
+            while q and nums[j] >= nums[q[-1]]:
+                q.pop()
+            q.append(j)
+            while q[0] <= j - k:
+                q.popleft()
+            ans.append(nums[q[0]])
+        return ans
+
 
 
 # nums = [1,3,-1,-3,5,3,6,7]
