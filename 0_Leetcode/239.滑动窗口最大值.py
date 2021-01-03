@@ -41,8 +41,10 @@ Created on 1:52 PM 1/2/21
 """
 import json
 from typing import List
+import heapq
+
 class Solution:
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+    def maxSlidingWindow1(self, nums: List[int], k: int) -> List[int]: # 暴力法
         n = len(nums)
         res = []
         for i in range(n - k +1):
@@ -53,16 +55,18 @@ class Solution:
             res.append(maxx)
         return res
 
-    def maxSlidingWindow2(self, nums: List[int], k: int) -> List[int]: # 暴力法
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         n = len(nums)
-        res = []
-        for i in range(n-k):
-            maxx = 0
-            for j in range(i, i+k):
-                if nums[j] > maxx:
-                    maxx = nums[j]
-            res.append(maxx)
-        return res
+        q = [(-nums[i], i) for i in range(k)]
+        heapq.heapify(q)
+
+        ans = [-q[0][0]]
+        for j in range(k, n):
+            heapq.heappush(q, (-nums[j], j))
+            if q[0][1] <= j - k: # 用while 不是 if : 要把前面所有不在k范围内的都要pop掉
+                heapq.heappop(q)
+            ans.append(-q[0][0])
+        return ans
 
 
 # nums = [1,3,-1,-3,5,3,6,7]
