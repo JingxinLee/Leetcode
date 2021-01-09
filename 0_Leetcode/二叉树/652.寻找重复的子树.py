@@ -60,8 +60,8 @@ class Solution(object):
         subtree = left + "," + right + "," + str(root.val)  # subtree也为string类型
 
         if subtree in self.memo.keys() and self.memo[subtree] == 1:
-            self.res.append(root)
-            self.memo[subtree] += 1
+            self.res.append(root)   # 记录重复的子树根节点
+            self.memo[subtree] += 1 # 记录所有子树以及出现的次数
         elif subtree not in self.memo.keys():
             self.memo[subtree] = 1
 
