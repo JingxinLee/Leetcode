@@ -73,15 +73,15 @@ class Solution(object):
         def union(index1: int, index2: int):
             parent[find(index1)] = find(index2)
 
-        provinces = len(isConnected)
-        parent = list(range(provinces))
+        cities = len(isConnected)
+        parent = list(range(cities))
 
-        for i in range(provinces):
-            for j in range(i + 1, provinces):
+        for i in range(cities):
+            for j in range(i + 1, cities):
                 if isConnected[i][j] == 1:
                     union(i, j)
 
-        circles = sum(parent[i] == i for i in range(provinces))
+        circles = sum(parent[i] == i for i in range(cities))
         return circles
 
 
