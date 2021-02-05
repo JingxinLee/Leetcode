@@ -44,8 +44,38 @@ import json
 from typing import List
 import heapq
 import collections
+class MonotonicQueue:
+    def __init__(self):
+        self.q = []
 
+    def push(self, n):
+        while self.q and self.q[-1] < n:
+            self.q.pop()
+        self.q.append(n)
+
+    def max(self):
+        return self.q[0]
+
+    def pop(self, n):
+        if self.q and self.q[0] == n:
+            self.q.pop(0)
 class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:  # 单调队列
+        if not nums or k == 0: return []
+        n = len(nums)
+        windows = MonotonicQueue()
+        res = []
+        for i in range(n):
+            if i < k - 1:
+                windows.push(nums[i])
+            else:
+                windows.push(nums[i])
+                res.append(windows.max())
+                windows.pop(nums[i - k + 1])
+        return res
+
+
+class Solution1:
     def maxSlidingWindow1(self, nums: List[int], k: int) -> List[int]: # 暴力法
         n = len(nums)
         res = []
@@ -92,6 +122,7 @@ class Solution:
             while q and nums[j] >= nums[q[-1]]:
                 q.pop()
             q.append(j)
+
             while q[0] <= j - k:
                 q.popleft()
             ans.append(nums[q[0]])
