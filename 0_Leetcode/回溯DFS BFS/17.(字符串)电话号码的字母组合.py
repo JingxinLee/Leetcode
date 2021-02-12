@@ -7,7 +7,7 @@ Created on 5:33 PM 1/31/21
 Difficulty: **中等**
 
 
-给定一个仅包含数字 `2-9` 的字符串，返回所有它能表示的字母组合。答案可以按 **任意顺序** 返回。
+给定一个仅包含数字`2-9`的字符串，返回所有它能表示的字母组合。答案可以按 **任意顺序** 返回。
 
 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
 
@@ -45,7 +45,7 @@ from typing import List
 
 
 
-class Solution:
+class Solution0:
     def letterCombinations(self, digits: str) -> List[str]:
         if not digits:
             return []
@@ -101,6 +101,52 @@ class Solution2:
         dfs('', 0)  # 递归的入口，初始字符串为''，指针为0
         return res
 
+import collections
+class Solution3: # BFS
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        mapping = {'2':'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
+        que = collections.deque()
+        que.append('')
+        for i in range(len(digits)):
+            len_que = len(que)
+            for j in range(len_que):
+                cur_digit = mapping[digits[i]]
+                cur_que_digit = que.popleft()
+                for digit in cur_digit:
+                    que.append(cur_que_digit + digit)
+            #print('当前队列中的内容: ', que)
+        return list(que)
+
+from queue import Queue
+class Solution: # 队列 BFS
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        mapping = {'2':'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
+        que = collections.deque()
+        que.append('')
+        for i in range(len(digits)):
+            cur_digit = mapping[digits[i]]
+            for j in range(len(que)):
+                cur_que_digit = que.popleft()
+                for digit in cur_digit:
+                    que.append(cur_que_digit + digit)
+            #print('当前队列中的内容: ', que)
+        return list(que)
+
+class Solution4: # 队列 BFS
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits: return []
+        phone = ['abc','def','ghi','jkl','mno','pqrs','tuv','wxyz']
+        queue = ['']  # 初始化队列
+        for digit in digits:
+            for _ in range(len(queue)):
+                tmp = queue.pop(0)
+                for letter in phone[ord(digit)-50]:# 这里我们不使用 int() 转换字符串，使用ASCII码
+                    queue.append(tmp + letter)
+        return queue
 
 def stringToString(input):
     return input[1:-1]

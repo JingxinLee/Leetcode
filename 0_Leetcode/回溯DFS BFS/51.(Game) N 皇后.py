@@ -52,7 +52,7 @@ class Solution:
         return self.res
 
     def backtrack(self, trace: List[str], row: int):
-        if len(trace) == row:
+        if row == len(trace): # len(trace)是一个固定值, row 是从0 加到它为止
             ret = list(trace)
             self.res.append(ret)
             return
