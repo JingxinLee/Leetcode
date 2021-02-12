@@ -34,7 +34,8 @@ board =
 *   `1 <= word.length <= 10^3`
 
 https://leetcode-cn.com/problems/word-search/solution/shou-hua-tu-jie-79-dan-ci-sou-suo-dfs-si-lu-de-cha/
-
+https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/hui-su-dui-lie-tu-jie-by-ml-zimingmeng/
+https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/python-de-bfshe-di-gui-liang-chong-jian-dan-jie-fa/
 """
 import json
 from typing import List
@@ -43,6 +44,7 @@ class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         m, n = len(board), len(board[0])
         used = [[False] * n for _ in range(m)]
+
         def dfs(row, col, i): # 判断当前点是否是目标路径上的点. row col 当前点的坐标，i当前考察的word字符索引
             if i == len(word): # i 递归结束条件 : 找到了单词的最后一个
                 return True
@@ -79,7 +81,7 @@ class Solution2:
         return False
 
     def backtrack(self, board, word, used, i, j):
-        if len(word) == 0: # word长度做递归结束调价条件
+        if len(word) == 0: # word长度做递归结束条件
             return True
 
         for direction in self.directions:
@@ -94,6 +96,9 @@ class Solution2:
                     return True
                 used[cur_i][cur_j] = 0
         return False
+
+
+
 
 
 

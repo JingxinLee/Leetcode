@@ -59,8 +59,8 @@ class Solution:
     def getPermutation(self, n: int, k: int) -> str:
         track = []
         used = [False] * (n+1)
-        factorial = [1 for _ in range(n+1)]
-        for i in range(2, n+1):
+        factorial = [1 for _ in range(n+1)] # 0! = 1   1! = 1 ...
+        for i in range(2, n+1): # 保留阶乘的结果
             factorial[i] = factorial[i-1] * i
         self.backtrack(n, k, factorial, track, used, depth=0)
         #return self.res
@@ -71,7 +71,7 @@ class Solution:
         if depth == n:
             #self.res.append(''.join(str(j) for j in track[:]))
             return
-        cnt = factorial[n - 1 - depth] # 全排列的个数
+        cnt = factorial[n - 1 - depth] # 全排列的个数, 此时应该是选择了depth + 1个数之后
         for i in range(1, n+1): # 范围是 [1,n]
             if not used[i]:
                 if cnt  < k: # 如果全排列的个数 < k 说明不在这一堆,跳过

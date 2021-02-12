@@ -56,6 +56,7 @@ class Solution:
 
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         track = []
+        candidates.sort() # 要先排序
         self.backtrack(candidates, target, 0, 0, track)
         return self.res
 
@@ -67,7 +68,7 @@ class Solution:
         for i in range(start, len(nums)):
             # 剪 枝
             if sum > target: # 当前状态的sum大于target的时候就应该剪枝，不用再递归下去了
-                continue
+                continue # 也可以 return
             # 做 出 选 择
             track.append(nums[i])
             # 无 限 次 被 选 择，那么 i 就不用 +1 。即下一层的选择列表，从自身开始。并且要更新当前状态的sum

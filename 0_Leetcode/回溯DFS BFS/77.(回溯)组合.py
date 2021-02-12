@@ -107,16 +107,18 @@ class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         if k <= 0 or n <= 0: return self.res
         track = []
-        self.backtrack(n, k, 1, [])
+        self.backtrack(n, k, 1, []) # 根据题目规定,返回 1 ... _n_ 中所有可能的 _k_ 个数的组合 =>  从1开始
         return self.res
 
     def backtrack(self, n, k, start, track):
         if len(track) == k:
             self.res.append(track[:])
             return
+
         # 搜索起点的上界 + 接下来要选择的元素个数 - 1 = n
         #                接下来要选择的元素个数 = k - path.size()
         # 搜索起点的上界 = n - (k - path.size()) + 1
+
         for i in range(start, n - (k - len(track)) + 1 + 1):
             track.append(i)
             #  下一轮搜索，设置的搜索起点要加 1，因为组合数理  不允许出现重复的元素
