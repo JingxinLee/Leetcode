@@ -34,9 +34,29 @@ Difficulty: **中等**
 """
 import json
 from typing import List
-
+import collections
 
 class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        counter1 = collections.Counter(s1)
+        n1, n2 = len(s1), len(s2)
+        left = 0
+        right = n1 - 1
+        counter2 = collections.Counter(s2[:right]) # 统计窗口s2[left, right - 1]内的元素出现的次数
+        while right < n2:
+            counter2[s2[right]] += 1   #  # 把 right 位置的元素放到 counter2 中. 此时两者个数都为s1长度
+            if counter1 == counter2: # 如果滑动窗口内各个元素出现的次数跟 s1 的元素出现次数完全一致，返回 True
+                return True
+            # 不相等的话就删除左边的, 再右移
+            counter2[s2[left]] -= 1
+            if counter2[s2[left]] == 0 : # 如果当前 left 位置的元素出现次数为 0， 需要从字典中删除
+                del counter2[s2[left]]
+            left += 1
+            right += 1
+        return False
+
+
+class Solution2:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         need = {}
         window = {}
@@ -63,6 +83,22 @@ class Solution:
                         valid -= 1
                     window[b] -= 1
         return False
+
+
+class Solution3:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        need = {}
+        window = {}
+        for s in s1:
+            need[s] = 1 if s not in need else need[s] + 1
+        n1, n2 = len(s1), len(s2)
+        for i in range(n1):
+            window[s2[i]] = 1 if s2[i] not in window else window[s2[i]] + 1
+
+        for j in range(n1, n2):
+            window.pop(s2[j - n1])
+            window[j] = 1 if s2[j] not in window else window[j] + 1
+
 
 def stringToString(input):
     return input[1:-1]
